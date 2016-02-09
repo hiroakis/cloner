@@ -4,12 +4,23 @@ cloner is a simple tool to clone all of the github repositories in specified org
 
 ## Use case
 
-When you join to new team/company which use github, you can clone all of repositories easily.
+When you join to new team/company which uses github, you can clone all of repositories easily.
 
 ## Installation
 
+Just go get
+
 ```
+go get golang.org/x/oauth2
+go get github.com/google/go-github/github
 go get github.com/hiroakis/cloner
+```
+
+or build
+
+```
+git clone git@github.com:hiroakis/cloner.git
+cd cloner
 make
 ```
 
@@ -26,7 +37,7 @@ cloner -token YOUR_GITHUB_API_TOKEN -org TARGET_ORGANIZATION_NAME
 * options
 
 ```
--token  The token should have "repo" scope. REQUIRED.
+-token  The github access token. The token should have "repo" scope. REQUIRED.
 -org    The organization name. REQUIRED.
 -type   The type of the repository. "private" or "public". OPTIONAL(default: private)
 ```
