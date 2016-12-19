@@ -50,7 +50,7 @@ func main() {
 			cmd := exec.Command("git", "clone", *repo.SSHURL)
 			cmd.Start()
 			ch <- true
-		}(repo)
+		}(*repo)
 	}
 
 	for i := 0; i < len(repos); i++ {
