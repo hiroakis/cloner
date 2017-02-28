@@ -3,17 +3,20 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/google/go-github/github"
-	"golang.org/x/oauth2"
 	"os"
 	"os/exec"
 	"runtime"
+
+	"github.com/google/go-github/github"
+	"golang.org/x/oauth2"
 )
 
 func main() {
 	token := flag.String("token", "", "the token of github")
 	org := flag.String("org", "", "the name of organization")
 	typeOfRepo := flag.String("type", "private", "private or public. default: private")
+	page := flag.Int("page", 1, "the page num. default: 1")
+	perPage := flag.Int("per", 100, "the number of results to include per page. default: 100")
 	flag.Parse()
 
 	if *token == "" || *org == "" {
@@ -27,7 +30,10 @@ func main() {
 	tc := oauth2.NewClient(oauth2.NoContext, ts)
 	client := github.NewClient(tc)
 
-	opt := &github.RepositoryListByOrgOptions{Type: *typeOfRepo}
+	opt := &github.RepositoryListByOrgOptions{
+		Type:        *typeOfRepo,
+		ListOptions: github.ListOptions{Page: *page, PerPage: *perPage},
+	}
 	repos, _, err := client.Repositories.ListByOrg(*org, opt)
 	if err != nil {
 		fmt.Println(err)
