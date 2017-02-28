@@ -40,6 +40,8 @@ cloner -token YOUR_GITHUB_API_TOKEN -org TARGET_ORGANIZATION_NAME
 -token  The github access token. The token should have "repo" scope. REQUIRED.
 -org    The organization name. REQUIRED.
 -type   The type of the repository. "private" or "public". OPTIONAL(default: private)
+-page   The page num. OPTIONAL(default: 1)
+-per    The number of results to include per page. OPTIONAL(default: 100)
 ```
 
 ## License
