@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
+	"context"
 
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
@@ -34,7 +35,7 @@ func main() {
 		Type:        *typeOfRepo,
 		ListOptions: github.ListOptions{Page: *page, PerPage: *perPage},
 	}
-	repos, _, err := client.Repositories.ListByOrg(*org, opt)
+	repos, _, err := client.Repositories.ListByOrg(context.Background(), *org, opt)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
