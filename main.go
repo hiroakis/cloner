@@ -3,11 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/google/go-github/github"
-	"golang.org/x/oauth2"
 	"os"
 	"os/exec"
 	"runtime"
+
+	"github.com/google/go-github/github"
+	"golang.org/x/oauth2"
 )
 
 func main() {
@@ -17,7 +18,7 @@ func main() {
 	flag.Parse()
 
 	if *token == "" || *org == "" {
-		fmt.Println("-token and -org are requered")
+		fmt.Println("-token and -org are required")
 		os.Exit(1)
 	}
 
@@ -26,7 +27,6 @@ func main() {
 	)
 	tc := oauth2.NewClient(oauth2.NoContext, ts)
 	client := github.NewClient(tc)
-
 	opt := &github.RepositoryListByOrgOptions{Type: *typeOfRepo}
 	repos, _, err := client.Repositories.ListByOrg(*org, opt)
 	if err != nil {
